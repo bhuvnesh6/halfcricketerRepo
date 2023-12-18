@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/abca6c4aae.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="/stylesheets/article.css">
+<link rel="stylesheet" href="/stylesheets/comment.css">
+<body>
+    <main>
+
+        <div class="header">
+      
+          <div class="title">
+            <h1 class="title__name"><%= article10.title %></h1>
+            <h2 class="title__categories">
+              <span class="categories__icon material-symbols-outlined">sell</span>
+              <% article10.tags.forEach(tag =>{%>
+              <span class="categories__item"><%=tag %></span>
+           <% })%>
+              
+            </h2>
+          </div>
+      
+          <div class="stats">
+            <div class="stats__stat">
+              <p class="stat__name">Totel likes</p>
+              <p class="stat__value"><%= article10.likes.length %></p>
+            </div>
+
+            <div class="stats__divider"></div>
+            <div class="stats__stat">
+              <p class="stat__name">Shares</p>
+              <p class="stat__value"><%= article10.likes.length %></p>
+            </div>
+
+            <div class="stats__divider"></div>
+            <div class="stats__stat">
+              <p class="stat__name">views</p>
+              <p class="stat__value"><%= article10.views %></p>
+            </div>
+      
+            <div class="stats__divider"></div>
+      
+            <div class="stats__stat">
+              <p class="stat__name">published</p>
+              <% const dateOptions = { day: '2-digit', month: 'short', year: 'numeric' }; %>
+<% const formattedDate = article10.date.toLocaleDateString('en-US', dateOptions); %>
+              <p class="stat__value"><%= formattedDate  %></p>
+            </div>
+      
+          </div>
+      
+        </div>
+      
+        <div class="content">
+          <img src="https://cdn.pixabay.com/photo/2019/08/29/04/53/wellington-4438121_640.jpg">
+          <br><br><br>
+          <h3 class="title__categories auth">Auther:<span class="name"><%= article10.author %></span></h3>
+          <br><br><br>
+          <div><%- article10.content %></div>
+          <p><%= udata.name %></p>
+        </div>
+
+        <!--likes -->
+        <hr>
+        <div class="lnads">
+          <div class="likdiv">
+        <form action="/like" method="post">
+          <input type="hidden" name="ARId" value="<%= article10._id %>">
+          <input type="hidden" name="likeId" value="<%= udata._id %>">
+          <button type="submit" class="like">
+            <% if (currentUser && article10.likes.includes(currentUser.id)) { %>
+              <i class="fa-solid fa-heart fa-2xl iconL" id ="liked"style="color: #f84935;"></i>
+              <p style="color: #f84935;">Unlike</p>
+            <% } else { %>
+              <i class="fa-regular fa-heart fa-2xl iconL" style="color: #000000;"></i>
+          <p>Like</p>
+            <% } %>
+          </button>
+        </form></div>
+
+
+        <div class="share" onclick="togglePopup()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="-0.5 0 25 25" fill="none">
+            <path d="M13.47 4.13998C12.74 4.35998 12.28 5.96 12.09 7.91C6.77997 7.91 2 13.4802 2 20.0802C4.19 14.0802 8.99995 12.45 12.14 12.45C12.34 14.21 12.79 15.6202 13.47 15.8202C15.57 16.4302 22 12.4401 22 9.98006C22 7.52006 15.57 3.52998 13.47 4.13998Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>Share</p>
+        </div>
+       
+        </div>
+        <hr>
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+
+        <div class="comment">
+         <div class="cm">
+         <form action="/comment" method="post" comment id="cfom" class="pop">
+           <input name="text" type="text" placeholder="post a comment" id="text">
+           <input  class="dpn" type="text" name="id" value="<%=article10._id %>">
+           <input class="dpn" type="text" name="userId" value="<%=udata._id %>">
+           <button type="submit"  class="sbmt">Post Comment</button></div>
+       </form>
+       
+     <!--This comment content-->
+     <% article10.comments.forEach(comment => { %>
+      <% if (currentUser && currentUser._id.equals(comment.author._id)) {%>
+     <div class="comment__item">
+       <div class="flex">
+         <img src="/images/profiles/<%= comment.author.dp %>" alt="avatar" class="comment__item__avatar" />
+         <div class="flex-grow">
+           <h3 class="comment__item__title"><a href="/profile"><%= comment.author.name %></a></h3>
+         <% } else { %>
+          <h3 class="comment__item__title"><a href="/author/<%= comment.author._id%>"><%= comment.author.name %></a></h3>
+        <% } %>
+           <h4 class="comment__item__subtitle"><%= comment.author.username %></h4>
+         </div>
+       </div>
+       <p class="comment__item__content"><%= comment.text %></p>
+     </div>
+<!--form  for  comment replay-->   
+     <!--Replies-->
+     <% comment.replies.forEach(replay => { %> 
+     <div class="comment__item comment__item--sub">
+       <div class="flex">
+         <img src="/images/profiles/<%= replay.author.dp %>" alt="avatar" class="comment__item__avatar" />
+         <div class="flex-grow">
+          <% if (currentUser && currentUser._id.equals(replay.author._id)) {%>
+           <h3 class="comment__item__title"><a href="/profile"><%= replay.author.name %></a></h3>
+          <% } else { %>
+            <h3 class="comment__item__title"><a href="/author/<%=replay.author._id %>"><%= replay.author.name %></a></h3>
+          <%}%>
+           <h4 class="comment__item__subtitle">@<%= replay.author.username %></h4>
+         </div>
+       </div>
+       <p class="comment__item__content"><%= replay.text %></p>
+     </div>
+ 
+<!--commintig for replay-->
+
+
+ 
+<!--This is replay for each comment-->
+<form action="/reply" method="post" class="rep" class="pop">
+<input name="text1" type="text" placeholder="post comment" id="text" required>
+<input  class="dpn" type="text" name="commentId" value="<%=comment._id %>">
+<input class="dpn" type="text" name="userId" value="<%= udata._id %>">
+<button type="submit" id="repl">Reply</button>
+</form>
+ <% }) %>
+ <p class="show-more" onclick="toggleReplies(this, <%= comment.replies.length %>)">Show more replies</p>
+
+ <form action="/reply" method="post" class="rep" class="pop">
+  <input name="text1" type="text" placeholder="post comment" id="text" required>
+  <input  class="dpn" type="text" name="commentId" value="<%=comment._id %>">
+  <input class="dpn" type="text" name="userId" value="<%= udata._id %>">
+  <button type="submit" id="repl">Reply</button>
+  </form>
+<% }) %>
+</div>
+</main>
+    
+    
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<div class="popup" id="popup">
+    <h1>Share on social media</h1>
+    <div class="socialiconhub" onclick="sharen()">
+      <input type="text" value="<%=article10._id%>" id="urlid" name="arID">
+    <div class="socialicon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 335 276" fill="#3ba9ee">
+        <path d="m302 70a195 195 0 0 1 -299 175 142 142 0 0 0 97 -30 70 70 0 0 1 -58 -47 70 70 0 0 0 31 -2 70 70 0 0 1 -57 -66 70 70 0 0 0 28 5 70 70 0 0 1 -18 -90 195 195 0 0 0 141 72 67 67 0 0 1 116 -62 117 117 0 0 0 43 -17 65 65 0 0 1 -31 38 117 117 0 0 0 39 -11 65 65 0 0 1 -32 35"/>
+      </svg>
+      <p>Twitter(X)</p>
+    </div>
+    <div class="socialicon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="60px" height="60px" viewBox="0 0 24 24" id="facebook" data-name="Flat Color" class="icon flat-color"><path id="primary" d="M14,6h3a1,1,0,0,0,1-1V3a1,1,0,0,0-1-1H14A5,5,0,0,0,9,7v3H7a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1H9v7a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V14h2.22a1,1,0,0,0,1-.76l.5-2a1,1,0,0,0-1-1.24H13V7A1,1,0,0,1,14,6Z" style="fill: rgb(0, 0, 0);"/></svg>
+      <p>Faebook</p>
+    </div>
+    <div class="socialicon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 48 48" version="1.1">
+
+        <title>Whatsapp-color</title>
+        <desc>Created with Sketch.</desc>
+        <defs>
+    
+    </defs>
+        <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Color-" transform="translate(-700.000000, -360.000000)" fill="#67C15E">
+                <path d="M723.993033,360 C710.762252,360 700,370.765287 700,383.999801 C700,389.248451 701.692661,394.116025 704.570026,398.066947 L701.579605,406.983798 L710.804449,404.035539 C714.598605,406.546975 719.126434,408 724.006967,408 C737.237748,408 748,397.234315 748,384.000199 C748,370.765685 737.237748,360.000398 724.006967,360.000398 L723.993033,360.000398 L723.993033,360 Z M717.29285,372.190836 C716.827488,371.07628 716.474784,371.034071 715.769774,371.005401 C715.529728,370.991464 715.262214,370.977527 714.96564,370.977527 C714.04845,370.977527 713.089462,371.245514 712.511043,371.838033 C711.806033,372.557577 710.056843,374.23638 710.056843,377.679202 C710.056843,381.122023 712.567571,384.451756 712.905944,384.917648 C713.258648,385.382743 717.800808,392.55031 724.853297,395.471492 C730.368379,397.757149 732.00491,397.545307 733.260074,397.27732 C735.093658,396.882308 737.393002,395.527239 737.971421,393.891043 C738.54984,392.25405 738.54984,390.857171 738.380255,390.560912 C738.211068,390.264652 737.745308,390.095816 737.040298,389.742615 C736.335288,389.389811 732.90737,387.696673 732.25849,387.470894 C731.623543,387.231179 731.017259,387.315995 730.537963,387.99333 C729.860819,388.938653 729.198006,389.89831 728.661785,390.476494 C728.238619,390.928051 727.547144,390.984595 726.969123,390.744481 C726.193254,390.420348 724.021298,389.657798 721.340985,387.273388 C719.267356,385.42535 717.856938,383.125756 717.448104,382.434484 C717.038871,381.729275 717.405907,381.319529 717.729948,380.938852 C718.082653,380.501232 718.421026,380.191036 718.77373,379.781688 C719.126434,379.372738 719.323884,379.160897 719.549599,378.681068 C719.789645,378.215575 719.62006,377.735746 719.450874,377.382942 C719.281687,377.030139 717.871269,373.587317 717.29285,372.190836 Z" id="Whatsapp">
+    
+    </path>
+            </g>
+        </g>
+    </svg>
+      <p>Whatsapp</p>
+    </div>
+    <div class="socialicon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 48 48" fill="none">
+        <g id="Base/copy-link">
+        <path d="M0 0H48V48H0V0Z" fill="white" fill-opacity="0.01"/>
+        <g id="ç¼ç» 2">
+        <g id="ç¼ç»">
+        <rect id="ç©å½¢" width="48" height="48" fill="white" fill-opacity="0.01"/>
+        <path id="å½¢ç¶" d="M12 9.92704V7C12 5.34315 13.3431 4 15 4H41C42.6569 4 44 5.34315 44 7V33C44 34.6569 42.6569 36 41 36H38.0174" stroke="#000000" stroke-width="4"/>
+        <rect id="Rectangle Copy" x="4" y="10" width="34" height="34" rx="3" fill="#2F88FF" stroke="#000000" stroke-width="4" stroke-linejoin="round"/>
+        </g>
+        <g id="ç¼ç»_2">
+        <g id="Group">
+        <path id="Oval" d="M18.4396 23.1098L23.7321 17.6003C25.1838 16.1486 27.5693 16.1806 29.0604 17.6717C30.5515 19.1628 30.5835 21.5483 29.1319 23L27.2218 25.0228" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="Oval Copy 2" d="M13.4661 28.7469C12.9558 29.2573 11.9006 30.2762 11.9006 30.2762C10.4489 31.7279 10.4095 34.3152 11.9006 35.8063C13.3917 37.2974 15.7772 37.3294 17.2289 35.8777L22.3931 31.1894" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="Oval Copy" d="M18.6631 28.3283C17.9705 27.6357 17.5927 26.7501 17.5321 25.8547C17.4624 24.8225 17.8143 23.7774 18.5916 23" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="Oval Copy 3" d="M22.3218 25.8611C23.8129 27.3522 23.8449 29.7377 22.3932 31.1894" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        </g>
+        </g>
+        </g>
+        </svg>
+        <p>Copy link</p>
+    </div>
+  </div>
+    <button id="clbtn" onclick="closePopup()">Close</button>
+</div>     
+         
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  let replyButtons = document.querySelectorAll('.btn1');
+  let replyForms = document.querySelectorAll('.rep');
+
+  replyButtons.forEach(function (button, index) {
+    button.addEventListener('click', function () {
+      // Hide all reply forms
+      replyForms.forEach(function (form) {
+        form.style.display = 'none';
+      });
+
+      // Show the corresponding reply form
+      replyForms[index].style.display = 'block';
+    });
+  });
+});
+
+</script>
+<script>
+   function togglePopup() {
+        var popup = document.getElementById('popup');
+        var overlay = document.getElementById('overlay');
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    function closePopup() {
+        var popup = document.getElementById('popup');
+        var overlay = document.getElementById('overlay');
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+
+    toggleReplies(element, totalReplies)
+    function toggleReplies(element, totalReplies) {
+    var replies = element.previousElementSibling; // Get the .replies div
+    if (replies.style.display === 'block') {
+      replies.style.display = 'block';
+      element.textContent = 'Show fewer replies';
+    } else {
+      replies.style.display = 'none';
+      element.textContent = 'Show more replies (' + totalReplies + ')';
+    }
+  }
+</script>
+<script src="/public/javascripts/socialShair.js"></script>
+</body>
+</html>

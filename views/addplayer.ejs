@@ -1,0 +1,48 @@
+<!-- edit_profile.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Add your CSS styles for responsiveness -->
+    <link rel="stylesheet" href="/stylesheets/editpro.css">
+</head>
+<body>
+
+  <h1>Add player for rating</h1>
+
+  <form action="add-player" method="POST" enctype="multipart/form-data">
+    <button type="submit" id="edit">Add player</button>
+    <!-- Input fields for name, username, bio -->
+    <label for="Playeroicture" class="labelforpro"><img src="/images/profiles/defaullt.jpeg" alt="" srcset=""><p>Choose a new pic</p></label>
+    <input type="file" id="Playeroicture" name="playerDP" style="display: none;" onchange="putname()">
+    <input type="text" id="nane" placeholder="playername" name="id">
+    <input type="text" id="name" name="name" placeholder="playername" required>
+    <input id="bio" name="dis" placeholder="write something about player">
+
+    <!-- Submit button -->
+    
+  </form>
+<script>
+  let lableImg = document.querySelector(".labelforpro img");
+  let playerPic = document.querySelector("#Playeroicture");
+  
+  function putname(){
+   let PlayPIC = playerPic.files[0];
+   let reader = new FileReader();
+   reader.onload = function(e){
+    lableImg.src = e.target.result;
+   }
+
+
+   if(PlayPIC){
+    reader.readAsDataURL(PlayPIC)
+   }
+  
+
+  }
+</script>
+</body>
+</html>

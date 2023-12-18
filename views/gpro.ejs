@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A profile of Halfcricketer users</title>
+    
+<link rel="stylesheet" href="/stylesheets/profile.css">
+</head>
+<body>
+    <header>
+        <h1>Halfcricketer</h1>
+    </header>
+    <div class="sear">
+      <form id="search" action="/Uresult" method="post">
+          <input type="text" name="search" id="item" value="Seacrh anyone">
+          <button type="submit" id="subtn">search</button>
+      </form>
+  </div>
+    <section>
+        <img src="/images/profiles/<%=userData.dp%>" alt="Profile Picture">
+        <div class="follow">
+          <% if(userData.type === "admin"){ %>
+            <div class="tag">
+              <h1><%=userData.name %></h1>
+              <img id="tag" src="<%= userData.tag %>">
+              <h1 id="userdis"><%= userData.type%></h1>
+             </div>
+         <% }else{ %>
+            <h1><%=userData.name %></h1>
+          <%}%>
+            <button class="btnf fbtn" ><a href="/login">Follow</a></button>
+        </div>
+        <p id="uname">@<%= userData.username %></p>
+        <p><%= userData.bio %></p>
+        <button id="gohome"><a href="/">Go to home</a></button>
+        <div class="fcont">
+            <div class="para" id="viewfollowing">
+            <p><%=userData.following.length%> Following</p>
+        </div>
+            <div class="para"  id="viewf">
+                <p class="fcont1" onclick="viewlist()"><%=userData.followers.length%> Followers</p>
+            </div>
+          
+        </div>
+        <div class="warp"></div>
+        <div class="list">
+          <button onclick="hide()">hide list</button>
+          <h1>Followers</h1>
+          <% userData.followers.forEach((follower)=>{ %>
+              <p><%=follower.name%></p>
+         <% }) %>
+         </div>
+         
+         <div class="list" id="list2">
+            <button onclick="hide2()">hide list</button>
+            <h1>Following</h1>
+            <% userData.following.forEach((follo)=>{ %>
+                <p><%=follo.name%></p>
+           <% }) %>
+           </div>
+          <script>
+            let warp = document.querySelector(".warp");
+            let list = document.querySelector(".list");
+            let list2 = document.querySelector("#list2");
+            let sho = document.querySelector("#viewf");
+            let sho2 = document.querySelector("#viewfollowing");
+           
+            sho.addEventListener('click', function(){
+              warp.style.display = "block";
+              list.style.display = "block";
+            })
+            function hide(){
+              list.style.display = "none";
+              warp.style.display = "none";
+            }
+          
+            // handling folloing list
+            sho2.addEventListener('click', function(){
+              warp.style.display = "block";
+              list2.style.display = "block";
+            })
+            function hide2(){
+              list2.style.display = "none";
+              warp.style.display = "none";
+            }
+
+            let tagim = document.querySelector("#tag");
+   let udis = document.querySelector("#userdis");
+  let n = 1;
+   tagim.addEventListener('click', function(){
+    if(n === 1){
+         udis.style.display = "block"
+         n = 2;
+         
+    } else{
+      udis.style.display = "none"
+         n = 1;  
+    }
+    
+   })
+           </script>
+</body>
+</html>

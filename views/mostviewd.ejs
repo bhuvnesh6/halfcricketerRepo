@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Most viewed article of Halfcricketer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="/stylesheets/trendview.css">
+</head>
+  <body>
+    <h1 class="nav justify-content-center bg-body-black"  style="background-color: #030303; color: white; padding: 10px;">Most viewed articles on halfcricketer ever</h1>
+    <div class="container" style="padding: 15px;">
+        <% viewd.forEach(data => { %> 
+   <a href="articles/<%=data._id%>" style="text-decoration: none;"> <div class="card mb-3 .Mviewd">
+        <img src="<%=data.thumbnail%>" class="card-img" style="height: 400px;" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%=data.title%></h5>
+          <p class="card-text"><%=data.discription%></p>
+          <p class="card-text"><small class="text-body-secondary">views : <%=data.views%></small></p>
+        </div>
+      </div>  
+    </a>
+      <%})%>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+  <div class="footer">
+    <!-- Your brand logo -->
+    <img src="your-logo.png" alt="Your Brand Logo">
+  
+    <!-- Navigation links -->
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/trending">Trending</a></li>
+      <li><a href="/mostview">Most Viewed</a></li>
+      <li><a href="#">Rate Player</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms and Conditions</a></li>
+      <li><a href="#">Copyright Notice</a></li>
+      <li><a href="#">Run Ads on HalfCricketer</a></li>
+      <li><a href="#">Write for Us</a></li>
+    </ul>
+  </div>
+</html>

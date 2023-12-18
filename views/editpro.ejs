@@ -1,0 +1,47 @@
+<!-- edit_profile.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Add your CSS styles for responsiveness -->
+    <link rel="stylesheet" href="/stylesheets/editpro.css">
+</head>
+<body>
+
+  <h1>Edit Profile</h1>
+
+  <form action="/update-profile" method="POST" enctype="multipart/form-data">
+    <button type="submit" id="edit">Save Changes</button>
+    <!-- Input fields for name, username, bio -->
+    <label for="profilePicture" class="labelforpro"><img src="/images/profiles/<%=userData.dp%>" alt="" srcset=""><p>Choose a new pic</p></label>
+    <input type="file" id="profilePicture" name="profilePicture" onchange="changeDefault()">
+    <input type="text" id="nane" value="<%= userData._id %>" name="id">
+    <input type="text" id="name" name="name" value="<%= userData.name %>" required>
+    <input id="bio" name="bio" value="<%= userData.bio %>">
+
+    <!-- Submit button -->
+    
+  </form>
+
+  <script>
+    let lavelIMG = document.querySelector('.labelforpro img');
+    let data = document.querySelector('#profilePicture');
+
+    function changeDefault(){
+      let FileURL = data.files[0];
+
+      let reader = new FileReader();
+      reader.onload = function(e){
+        lavelIMG.src = e.target.result;
+      }
+
+      if(FileURL){
+          reader.readAsDataURL(FileURL);
+        }
+    }
+  </script>
+</body>
+</html>

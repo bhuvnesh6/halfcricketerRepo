@@ -1,0 +1,137 @@
+#h11{
+    color: #ff5c5c;
+    text-align: center;
+    background-color: #333333;
+}
+.ratingData{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: auto;
+  }
+  
+  .ratingData::-webkit-scrollbar {
+    background: transparent;
+  }
+  
+  .ratingData::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #333333;
+  }
+  
+  .ratingData::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color:rgb(255, 114, 114);
+  }
+  
+  .warp{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: 100%;
+   flex-wrap: wrap;
+   text-align: center;
+   align-items: center;
+   justify-content: center;
+  }
+  
+  
+  .recipe-card{
+    margin: 20px;
+    width: calc(25.33% - 20px);
+    height: 395px;
+   background-color: #ffffff;
+   box-shadow: 3px 4px 15px #727272bb;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .recipe-card img{
+    height:150px;
+    width:100%;
+    border-radius: 7px;
+  }
+  
+  .recipe-card h1{
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  .recipe-infos{
+    display: flex;
+    margin-top: 30px;
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .recipe-infos span:nth-child(2){
+    margin-left: 20px;
+  }
+  
+  .recipe-infos span{
+    text-align: center;
+  }
+  
+  .rating{
+    margin-top: 20px;
+   
+  }
+  
+  .recipe-start{
+       position: relative;
+       top:20px;
+       
+       padding: 10px;
+       background-color: #fff;
+       border: none;
+       border-radius:5px ;
+       box-shadow: 3px 4px 15px #3b3a3ad4;
+       outline: none;
+       cursor: pointer;
+       font-weight: bold;
+       transition: ease .3s;
+  }
+  
+  .recipe-start a{
+        transition: ease .4s;
+        text-decoration: none;
+        color: black;
+  }
+  
+  .recipe-start:hover{
+    background-color: rgb(64, 105, 239);
+    transform: translateY(5px);
+  }
+  
+  .recipe-start:hover > a{
+    color:#fff;
+  }
+
+
+  @media only screen and (max-width: 900px){
+         .warp{
+            flex-direction: column;
+         }
+
+         .recipe-card{
+            width:90vw;
+         }
+
+         .recipe-card img{
+            width:50%
+         }
+  }
+
+  @media only screen and (max-width: 550px){
+    .recipe-card{
+        height:500px;
+     }
+    
+
+    .recipe-card img{
+        width:100%;
+        height: 220px;
+     }
+}

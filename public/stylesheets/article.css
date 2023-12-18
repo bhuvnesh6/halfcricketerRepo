@@ -1,0 +1,299 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+a{
+  color:black;
+  text-decoration: none;
+  font-size: bold;
+}
+body {
+  display: grid;
+  place-items: center;
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.material-symbols-outlined {
+  user-select: none;
+}
+
+main {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  padding: 30px;
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  margin-bottom: -60px;
+}
+
+.title {
+  width: max-content;
+  height: 20px;
+}
+
+.title__name {
+  font-weight: 600;
+  font-size: 50px;
+  font-family: Frank Ruhl Libre;
+}
+
+.title__categories {
+  margin-top: -25px;
+  text-align: left;
+  color: #aaa;
+  font-weight: 400;
+  font-size: 17.5px;
+  display: flex;
+  align-items: center;
+  gap: 7.5px;
+  font-family: Inter;
+}
+
+.categories__icon {
+  font-size: 20;
+  cursor: pointer;
+}
+
+.categories__item {
+  cursor: pointer;
+}
+
+.categories__item:not(:last-child)::after {
+  content: ",";
+  pointer-events: none;
+}
+
+.stats {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 20px;
+  position: relative;
+ 
+  text-align: left;
+}
+
+.stat__name {
+  display: block;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: 400;
+  font-family: Inter;
+}
+
+.stat__value {
+  display: block;
+  margin-top: -15px;
+  font-size: 35px;
+}
+
+.stats__divider {
+  position: relative;
+  display: inline-block;
+  top: -10px;
+  width: 2px;
+  height: 35px;
+  background-color: rgba(0, 0, 0, 0.075);
+  border-radius: 5px;
+}
+
+.content {
+  padding: 20px;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  font-family: Frank Ruhl Libre;
+  margin: 5px 0px;
+  scale: 1.25;
+  transform-origin: left;
+}
+
+.content p {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.lnads{
+  margin-top: 10px;
+  padding-top: 20px;
+}
+
+.content img {
+  height: auto;
+  width: 100%;
+  border-radius: 8px;
+  transition: 0.4s;
+}
+
+.auth{
+    padding: 20px;
+}
+
+/*comment section */
+#comments {
+  max-width: 600px;
+  margin: auto;
+}
+
+.comment {
+  margin-bottom: 15px;
+}
+
+.reply-form {
+  margin-top: 10px
+}
+
+
+
+.dpn{
+  display: none;
+}
+
+#ttt{
+  display: flex;
+  justify-content: space-between;
+}
+
+.likdiv{
+  margin-right:20px ;
+ transition: ease .4s;
+}
+
+.likdiv:hover{
+  transform: translateY(6px);
+}
+
+.like{
+  display: flex;
+  color:black;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+}
+#liked{
+  text-shadow: 2px 3px 8px #333333;
+}
+.iconL{
+  font-size: 50px;
+  margin-bottom:15px ;
+}
+.like p{
+  margin: 0px;
+  transform: translateY(15px);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* styles.css */
+
+.lnads{
+  display: flex;
+}
+
+.share{
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-20px);
+  margin-left: 50px;
+  cursor: pointer;
+  transition: ease .3s;
+}
+
+.share p{
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+ svg{
+  transition: ease .4s;
+}
+.share:hover{
+  transform: translateY(6px);
+}
+
+.share:hover svg{
+  transition: ease .4s;
+  fill:red;
+}
+
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.socialiconhub{
+  display:flex;
+}
+
+.socialiconhub p{
+  color: black;
+  font-size: 20px;
+  transform: translateY(-25px);
+}
+.socialicon{
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+#clbtn{
+  background-color: black;
+}
+
+#urlid{
+  display: none;
+}
+
+.smbt{
+  background-color: black;
+}
+
+@media only screen and (max-width: 800px) {
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+}

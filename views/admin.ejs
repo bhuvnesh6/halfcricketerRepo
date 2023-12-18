@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      max-width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+  .dp{
+    width: 200px;
+      height: 200px;
+      max-width: 200px;
+      border-radius: 50%;
+      padding: 5px;
+      border: 2px solid black;
+  }
+
+    .profile-name {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .profile-username {
+      color: #555;
+      font-size: 18px;
+    }
+    .menage{
+        max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+   .btns{
+    font-size: large;
+    padding: 5px 15px 5px 15px;
+    margin: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background-color: #fb4444;
+    box-shadow: 2px 4px 8px #706e6e;
+    transition: ease .3s;
+   }
+
+   a{
+    text-decoration: none;
+    color: #fff;
+   }
+
+   .btns:hover{
+    transform: translateY(4px);
+    background-color: rgb(47, 47, 255);
+   }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <div class="dp">
+    <img class="profile-image" src="/images/profile.jpg" alt="Profile Image">
+</div>
+    <div class="profile-name"><%= adminData.name %></div>
+    <div class="profile-username">@<%= adminData.username %></div>
+  </div>
+  <div class="menage">
+    <button class="btns"><a href="./manage">Manage Article</a></button>
+    <button class="btns"><a href="./write">Write</a></button>
+    <button class="btns"><a href="/profile">Go to Profile</a></button>
+    <button class="btns"><a href="/message">Messages</a></button>
+    <button class="btns"><a href="/addplayer">Add player</a></button>
+  </div>
+</body>
+</html>

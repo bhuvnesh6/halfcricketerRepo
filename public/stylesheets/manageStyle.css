@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    align-items: center;
+  }
+
+  
+
+  .artList{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 8px #333333;
+    font-size: 2rem;
+    width: 80%;
+    color:#333333;
+}
+
+.mbtn{
+    display: flex;
+    margin-left: 15px;
+}
+
+.mbtn p{
+    font-size: 1.5rem;
+    color: #989898;
+}
+
+.svgf{
+    margin-left: 30px;
+}
+
+.svgf a{
+    text-decoration: none;
+}
+.svgf svg{
+    height: 22px;
+    width: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}

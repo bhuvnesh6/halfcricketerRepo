@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+<link rel="stylesheet" href="/stylesheets/profile.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <!--Like massage-->
+    <% if (successMessages.length > 0) { %>
+        <% successMessages.forEach(message => { %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong><%= readersData.name %></strong> <%= message %>.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% }); %>
+      
+    <% } %>
+  <!--Unlike magsse-->
+    <% if (errorMessages.length > 0) { %>
+      <div class="error-messages">
+        <% errorMessages.forEach(message => { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong><%= readersData.name %></strong> <%= message %>.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% }); %>
+      </div>
+    <% } %>
+    <!--COmmment massage-->
+        <% if (commentMessages.length > 0) { %>
+            <% commentMessages.forEach(message => { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><%= readersData.name %></strong> <%= message %>.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% }); %>
+         
+        <% } %>
+<!--reolay massage-->
+        <% if (replayMessages.length > 0) { %>
+            <% replayMessages.forEach(message => { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><%= readersData.name %></strong> <%= message %>.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% }); %>
+          
+        <% } %>
+
+    </div>
+
+
+    <header>
+      <h1>Halfcricketer</h1>
+    </header>
+    <div class="sear">
+      <form id="search" action="/Uresult" method="post">
+          <input type="text" name="search" id="item" placeholder="Seacrh anyone" style="color: aliceblue;">
+          <button type="submit" id="subtn">search</button>
+      </form>
+  </div>
+    <section>
+      <div class="iml">
+                <img src="/images/profiles/<%= readersData.dp%>" alt="Profile Picture">
+                <button style="background-color: rgb(64, 64, 255);"><a href="/editpro">Edit</a></button>
+         <button><a href="/logout">Log out</a></button>
+        </div>
+        <% if(readersData.type === "admin"){ %>
+          <div class="tag">
+            <h1><%=readersData.name%></h1>
+            <img id="tag" src="<%= readersData.tag %>">
+            <h1 id="userdis"><%= readersData.type%></h1>
+           </div>
+       <% }else{ %>
+          <h1><%= readersData.name %></h1>
+        <%}%>
+        
+        
+        <p id="uname">@<%= readersData.username %></p>
+        <p><%=readersData.bio %></p>
+        <div class="fcont">
+          <div class="para" id="viewfollowing">
+          <p><%=readersData.following.length%> Following</p>
+      </div>
+          <div class="para"  id="viewf">
+              <p class="fcont1"><%=readersData.followers.length%> Followers</p>
+          </div>
+      </div>
+      <button id="gohome"><a href="/">Go to home</a></button>
+      </section>
+    <div>
+  <div class="warp"></div>
+  <div class="list">
+    <button onclick="hide()">hide list</button>
+    <h1>Followers</h1>
+    <% readersData.followers.forEach((follower)=>{ %>
+        <p><%=follower.name%></p>
+   <% }) %>
+   </div>
+   
+   <div class="list" id="list2">
+    <button onclick="hide2()">hide list</button>
+    <h1>Following</h1>
+    <% readersData.following.forEach((follo)=>{ %>
+        <p><%=follo.name%></p>
+   <% }) %>
+   </div>
+  
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+<script>
+  let warp = document.querySelector(".warp");
+  let list = document.querySelector(".list");
+  let list2 = document.querySelector("#list2");
+  let sho = document.querySelector("#viewf");
+  let sho2 = document.querySelector("#viewfollowing");
+ 
+  sho.addEventListener('click', function(){
+    warp.style.display = "block";
+    list.style.display = "block";
+  })
+  function hide(){
+    list.style.display = "none";
+    warp.style.display = "none";
+  }
+
+  // handling folloing list
+  sho2.addEventListener('click', function(){
+    warp.style.display = "block";
+    list2.style.display = "block";
+  })
+  function hide2(){
+    list2.style.display = "none";
+    warp.style.display = "none";
+  }
+   let tagim = document.querySelector("#tag");
+   let udis = document.querySelector("#userdis");
+  let n = 1;
+   tagim.addEventListener('click', function(){
+    if(n === 1){
+         udis.style.display = "block"
+         n = 2;
+         
+    } else{
+      udis.style.display = "none"
+         n = 1;  
+    }
+   })
+</script> 
+</html>

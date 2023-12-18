@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #tag{
+    display:none;
+  }
+</style>
+<link rel="stylesheet" href="/stylesheets/writingStylle.css">
+<body>
+    
+  <div class="container">
+    <button class="btn" onclick="addHeading()">Add h2</button>
+    <button class="btn" onclick="addList()">List</button>
+    <button class="btn" onclick="addLink()">Add link</button>
+    <button class="btn sbt" id="sbtn" disabled>Save</button>
+    <button class="btn sbtv" id="viewbtn" disabled>View</button>
+    <button class="btn" onclick="openPopup()">Image</button>
+    <!--upload image form -->
+
+    <!--submit buttom-->
+    <button id="submit" class="btn" onclick="savetoDB()">Edit</button>
+  </div>
+  <div class="content11">
+    <input type="text" id="tin" name="title" class="posin" value=" <%=updata.title%>">
+    <br>
+
+    <div id="content" contenteditable="true">
+        <%-updata.content%>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div id="view">
+    <h1 id="ttl"></h1>
+    <img src="" alt="Article Thumbnail of halfcrickerte" id="thumbnail">
+    <div id="para"></div>
+  </div>
+
+  <div class="tages">
+    <input type="text" name="" id="tag" value="<%=updata._id%>">
+
+    <p id="arr2"></p>
+  </div>
+  <div id="upl">
+    <h1>Upload an image</h1>
+    <form enctype="multipart/form-data">
+      <label class="btn" for="file">Choose a file:</label>
+      <input type="file" id="file" name="fileInput" accept=".png, .jpg, .jpeg">
+      <button onclick="uploadFile()" type="submit">Upload image</button>
+      <button onclick="clsbtn()">close</button>
+    </form>
+  </div>
+  <input type="text" name="discription" id="dis" value="<%=updata.discription%>">
+</body>
+<script src="/javascripts/writingScript.js"></script>
+<script>
+  function openPopup() {
+    let fom = document.querySelector("#upl");
+    fom.style.display = "block";
+    event.preventDefault();
+  }
+
+  function clsbtn() {
+    let fom = document.querySelector("#upl");
+    fom.style.display = "none";
+    event.preventDefault();
+  }
+
+  //uploading the images
+  function uploadFile() {
+    const fileInput = document.getElementById('file');
+    const file = fileInput.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      fetch('/upload', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // Parse the response as JSON
+        })
+        .then(data => {
+          const imageContainer = document.getElementById('content');
+          const img = document.createElement('img');
+          img.src = data.imageUrl; // Use the imageUrl from the response
+          imageContainer.appendChild(img);
+          let img1 = imageContainer.querySelector('img');
+          if (img1) {
+            let img1Src = img1.src;
+            let tum = document.querySelector('#thumbnail');
+            tum.src = img1Src;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Handle error in the client-side, if needed
+        });
+    }
+    event.preventDefault();
+  }
+  //sending data to serever
+  async function savetoDB() {
+    let tumD = document.querySelector('#thumbnail').src;
+    let dis = document.querySelector('#dis').value;
+    let content = document.querySelector('#content').innerHTML;
+    let title = document.querySelector('#tin').value;
+    let Eaid = document.querySelector('#tag').value;
+    const data = {
+      Eaid : Eaid,
+      title: title, //title
+      thumbnail: tumD, //thumbnail
+      dis: dis,   //discription
+      tags: myArray, //tags
+      content: content  //content
+    };
+    
+      const response = await fetch('/editArt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      alert("Article edited successfully")
+    
+    }
+
+
+</script>
+
+</html>

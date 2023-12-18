@@ -1,0 +1,33 @@
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .footer li {
+    margin: 0 15px;
+    margin-bottom: 10px;
+  }
+  
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
